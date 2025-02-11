@@ -24,7 +24,7 @@ public class Graph<E> implements IGraph<E> {
     }
 
     @Override
-    public String toJson() {
-        return "";
+    public Gson toJson() {
+        return null;
     }
 }

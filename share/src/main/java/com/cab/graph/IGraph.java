@@ -10,5 +10,5 @@ public interface IGraph<E> {
     void addNode(@NonNull final INode<E> node);
 
     void loadFromJson(@NonNull final Gson json);
-    String toJson();
+    Gson toJson();
 }
