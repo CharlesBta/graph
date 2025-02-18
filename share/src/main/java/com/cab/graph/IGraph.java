@@ -9,6 +9,6 @@ public interface IGraph<E> {
     List<INode<E>> getNodes();
     void addNode(@NonNull final INode<E> node);
 
-    void loadFromJson(@NonNull final Gson json);
+    void loadFromJson(@NonNull final String jsonFileName);
     Gson toJson();
 }

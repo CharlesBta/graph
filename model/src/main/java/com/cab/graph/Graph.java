@@ -4,6 +4,8 @@ import com.google.gson.Gson;
 import lombok.Getter;
 import lombok.NonNull;
 
+import java.net.URL;
+import java.nio.file.FileSystemNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +21,12 @@ public class Graph<E> implements IGraph<E> {
     }
 
     @Override
-    public void loadFromJson(final @NonNull Gson json) {
+    public void loadFromJson(final @NonNull String jsonFileName) {
+        final URL url =  this.getClass().getClassLoader().getResource(jsonFileName);
+        if (url == null) {
+            throw new FileSystemNotFoundException("File not found: " + jsonFileName);
+        }
+        final StringBuilder jsonString = new StringBuilder();
 
     }
 
