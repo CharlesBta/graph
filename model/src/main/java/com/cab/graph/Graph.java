@@ -1,16 +1,20 @@
 package com.cab.graph;
 
+import com.cab.graph.entity.Links;
 import com.google.gson.Gson;
 import lombok.Getter;
 import lombok.NonNull;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.URL;
 import java.nio.file.FileSystemNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
 @Getter
-public class Graph<E> implements IGraph<E> {
+public abstract class Graph<E> implements IGraph<E> {
     private final List<INode<E>> nodes = new ArrayList<>();
 
     @Override
@@ -20,18 +24,4 @@ public class Graph<E> implements IGraph<E> {
         }
     }
 
-    @Override
-    public void loadFromJson(final @NonNull String jsonFileName) {
-        final URL url =  this.getClass().getClassLoader().getResource(jsonFileName);
-        if (url == null) {
-            throw new FileSystemNotFoundException("File not found: " + jsonFileName);
-        }
-        final StringBuilder jsonString = new StringBuilder();
-
-    }
-
-    @Override
-    public Gson toJson() {
-        return null;
-    }
 }
