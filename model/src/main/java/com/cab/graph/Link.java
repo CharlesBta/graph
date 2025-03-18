@@ -6,10 +6,10 @@ import lombok.Setter;
 
 @Getter
 public class Link<E> implements ILink<E> {
-    private final INode<E> start;
     public final INode<E> end;
-
-    @NonNull @Setter
+    private final INode<E> start;
+    @NonNull
+    @Setter
     public int weight;
 
     public Link(@NonNull final INode<E> start,
@@ -21,5 +21,10 @@ public class Link<E> implements ILink<E> {
 
         this.start.addLink(this);
         this.end.addLink(this);
+    }
+
+    @Override
+    public int compareTo(final ILink<E> other) {
+        return Integer.compare(this.weight, other.getWeight());
     }
 }

@@ -26,10 +26,13 @@ public class StringGraph extends Graph<String> {
             reader.close();
 
             Links links = new Gson().fromJson(jsonString.toString(), Links.class);
-            for (com.cab.graph.entity.Link link : links){
+            for (com.cab.graph.entity.Link link : links) {
                 if (!this.hasAlreadyNodeValuedAs(link.nodes()[0])) this.getNodes().add(new Node<>(link.nodes()[0]));
                 if (!this.hasAlreadyNodeValuedAs(link.nodes()[1])) this.getNodes().add(new Node<>(link.nodes()[1]));
-
+                INode<String> start = this.getNodeByValue(link.nodes()[0]);
+                INode<String> end = this.getNodeByValue(link.nodes()[1]);
+                start.addLink(new Link<>(start, end, link.weight()));
+                end.addLink(new Link<>(end, start, link.weight()));
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -46,4 +49,7 @@ public class StringGraph extends Graph<String> {
         return this.getNodes().stream().anyMatch(n -> n.getValue().equals(node));
     }
 
+    private INode<String> getNodeByValue(final String node) {
+        return this.getNodes().stream().filter(n -> n.getValue().equals(node)).findFirst().orElse(null);
+    }
 }

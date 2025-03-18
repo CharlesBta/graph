@@ -24,4 +24,9 @@ public class Node<E> implements INode<E> {
             this.links.add(link);
         }
     }
+
+    @Override
+    public String toString() {
+        return this.getValue().toString();
+    }
 }
